@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 
 	"cbox/tools"
@@ -17,7 +16,7 @@ func main() {
 	var base64Encode string
 	var base64Decode string
 
-	fmt.Println(tools.Banner)
+	// fmt.Println(tools.Banner)
 
 	app := &cli.App{
 		Flags: []cli.Flag{
@@ -60,6 +59,9 @@ func main() {
 			if base64Encode != "" {
 				fmt.Println(tools.Base64Decode(base64Decode))
 			}
+			if len(os.Args) < 2 || c.NumFlags() < 2 {
+				cli.ShowAppHelp(c)
+			}
 
 			return nil
 		},
@@ -67,8 +69,5 @@ func main() {
 		Usage: "Converter Tool Box",
 	}
 
-	err := app.Run(os.Args)
-	if err != nil {
-		log.Fatal(err)
-	}
+	app.Run(os.Args)
 }
