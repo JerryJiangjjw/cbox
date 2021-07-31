@@ -16,7 +16,7 @@ func main() {
 	var base64Encode string
 	var base64Decode string
 
-	// fmt.Println(tools.Banner)
+	fmt.Println(tools.Banner)
 
 	app := &cli.App{
 		Flags: []cli.Flag{
