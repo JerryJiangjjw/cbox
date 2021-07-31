@@ -47,6 +47,7 @@ func main() {
 			},
 		},
 		Action: func(c *cli.Context) error {
+
 			if urlEncode != "" {
 				fmt.Println(tools.UrlEncode(urlEncode))
 			}
@@ -59,6 +60,7 @@ func main() {
 			if base64Encode != "" {
 				fmt.Println(tools.Base64Decode(base64Decode))
 			}
+
 			return nil
 		},
 		Name:  "CBox",
