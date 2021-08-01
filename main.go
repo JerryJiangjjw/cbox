@@ -56,7 +56,7 @@ func main() {
 			if base64Encode != "" {
 				fmt.Println(tools.Base64Encode(base64Encode))
 			}
-			if base64Encode != "" {
+			if base64Decode != "" {
 				fmt.Println(tools.Base64Decode(base64Decode))
 			}
 			if len(os.Args) < 2 || c.NumFlags() < 2 {
