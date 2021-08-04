@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 
 	"cbox/tools"
 
@@ -11,10 +12,12 @@ import (
 
 func main() {
 
-	var urlEncode string
-	var urlDecode string
-	var base64Encode string
-	var base64Decode string
+	var timeStampToData,
+		dateTotimeStamp,
+		urlEncode,
+		urlDecode,
+		base64Encode,
+		base64Decode string
 
 	fmt.Println(tools.Banner)
 
@@ -44,6 +47,18 @@ func main() {
 				Aliases:     []string{"b64d"},
 				Destination: &base64Decode,
 			},
+			&cli.StringFlag{
+				Name:        "timestamptodate",
+				Usage:       "timestamp to date",
+				Aliases:     []string{"ttd"},
+				Destination: &timeStampToData,
+			},
+			&cli.StringFlag{
+				Name:        "datetotimestmap",
+				Usage:       "date to timestamp",
+				Aliases:     []string{"dtt"},
+				Destination: &dateTotimeStamp,
+			},
 		},
 		Action: func(c *cli.Context) error {
 
@@ -58,6 +73,19 @@ func main() {
 			}
 			if base64Decode != "" {
 				fmt.Println(tools.Base64Decode(base64Decode))
+			}
+			if timeStampToData != "" {
+				int64, _ := strconv.ParseInt(timeStampToData, 10, 64)
+				fmt.Println(tools.TimeStampToDate(int64, "2006-01-02 15:04:05"))
+			}
+			if dateTotimeStamp != "" {
+				fmt.Println(dateTotimeStamp)
+				int64, err := tools.DateToTimeStmap(dateTotimeStamp, "2006-01-02 15:04:05")
+				if err == nil {
+					fmt.Println(int64)
+				} else {
+					fmt.Println(err)
+				}
 			}
 			if len(os.Args) < 2 || c.NumFlags() < 2 {
 				cli.ShowAppHelp(c)
